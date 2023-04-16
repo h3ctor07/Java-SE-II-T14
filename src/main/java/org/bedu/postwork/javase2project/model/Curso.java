@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cursos")
@@ -48,5 +49,29 @@ public class Curso {
 
     public void setCiclo(String ciclo) {
         this.ciclo = ciclo;
+    }
+
+    public Map<Estudiante, Integer> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(Map<Estudiante, Integer> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Curso curso = (Curso) o;
+        return id.equals(curso.id) &&
+                Objects.equals(materia, curso.materia) &&
+                Objects.equals(ciclo, curso.ciclo) &&
+                Objects.equals(calificaciones, curso.calificaciones);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, materia, ciclo, calificaciones);
     }
 }

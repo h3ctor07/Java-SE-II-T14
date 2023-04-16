@@ -9,7 +9,9 @@ import java.util.Objects;
 public class Materia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "nombre")
     @Size(max = 45)
     private String nombre;
 

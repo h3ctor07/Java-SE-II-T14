@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @Column(name = "nombre_completo")
     @Size(max = 45)
