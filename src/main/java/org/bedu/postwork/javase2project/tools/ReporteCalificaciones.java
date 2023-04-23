@@ -10,28 +10,31 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReporteCalificaciones {
-    public static List<String> obtenerReporte(List<Curso> cursos) {
-
-        // Ordenar cursos alfabéticamente por nombre de materia
-        cursos.sort(Comparator.comparing(c -> c.getMateria().getNombre()));
-
-        List<String> reporte = new ArrayList<>();
-
-        // Recorrer cada curso y obtener el reporte de calificaciones
-        cursos.forEach(curso -> {
-            Map<Estudiante, Integer> calificaciones = curso.getCalificaciones();
-            String nombreMateria = curso.getMateria().getNombre();
-
-            List<String> reporteCurso = calificaciones.entrySet().stream()
-                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                    .map(entry -> entry.getKey().getNombreCompleto() + " - " + nombreMateria + " - " + entry.getValue())
-                    .collect(Collectors.toList());
-
-            reporte.addAll(reporteCurso);
-        });
-
-        return reporte;
+    private List<Reporte> generaLista(Map<Estudiante, Integer> calificaciones, Comparator<Reporte> comparator) {
+        return calificaciones.entrySet()
+                .stream()
+                .map(entry -> {
+                    Reporte reporte = new Reporte();
+                    reporte.setNombreEstudiante(entry.getKey().getNombreCompleto());
+                    reporte.setCalificación(entry.getValue());
+                    return reporte;
+                })
+                .sorted(comparator)
+                .collect(Collectors.toList());
     }
+
+    public List<Reporte> alfabetico(Curso curso) {
+        Map<Estudiante, Integer> calificaciones = curso.getCalificaciones();
+        Comparator<Reporte> comparator = Comparator.comparing(Reporte::getNombreEstudiante);
+        return generaLista(calificaciones, comparator);
+    }
+
+    public List<Reporte> calificacion(Curso curso) {
+        Map<Estudiante, Integer> calificaciones = curso.getCalificaciones();
+        Comparator<Reporte> comparator = Comparator.comparing(Reporte::getCalificación).reversed();
+        return generaLista(calificaciones, comparator);
+    }
+
 }
 
 
