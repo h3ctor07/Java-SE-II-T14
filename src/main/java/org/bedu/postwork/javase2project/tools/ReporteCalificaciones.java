@@ -2,6 +2,7 @@ package org.bedu.postwork.javase2project.tools;
 
 import org.bedu.postwork.javase2project.model.Curso;
 import org.bedu.postwork.javase2project.model.Estudiante;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class ReporteCalificaciones {
     private List<Reporte> generaLista(Map<Estudiante, Integer> calificaciones, Comparator<Reporte> comparator) {
         return calificaciones.entrySet()
