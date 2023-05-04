@@ -38,8 +38,8 @@ public class CursoFactory {
             int calificacion = random.nextInt(50) + 51;
             calificaciones.put(estudiante, calificacion);
 
-            System.out.printf("Curso: %d Nombre: %s %s Calificación: %d%n",
-                    curso.getId(), estudiante.getNombreCompleto(), materia.getNombre(), calificacion);
+//            System.out.printf("Curso: %d Nombre: %s %s Calificación: %d%n",
+//                    curso.getId(), estudiante.getNombreCompleto(), materia.getNombre(), calificacion);
         }
 
         curso.setCalificaciones(calificaciones);
